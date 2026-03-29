@@ -169,71 +169,6 @@
             text-shadow: 1px 1px 0 #dae6ff;
         }
 
-        /* slideshow styles */
-        .slideshow-container {
-            position: relative;
-            width: 100%;
-            max-width: 600px;
-            margin: 2rem auto;
-            border-radius: 30px;
-            overflow: hidden;
-            box-shadow: 0 20px 30px rgba(0,0,0,0.15);
-            background: #f7d9d9;
-        }
-
-        .slides {
-            display: flex;
-            transition: transform 0.8s ease-in-out;
-        }
-
-        .slide {
-            min-width: 100%;
-            box-sizing: border-box;
-            position: relative;
-        }
-
-        .slide img {
-            width: 100%;
-            height: 350px;
-            object-fit: cover;
-            display: block;
-        }
-
-        .slide-caption {
-            position: absolute;
-            bottom: 20px;
-            left: 0;
-            width: 100%;
-            background: linear-gradient(to top, rgba(0,0,0,0.4), transparent);
-            color: white;
-            padding: 20px 15px 10px;
-            font-size: 1.2rem;
-            font-weight: 500;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-        }
-
-        .slideshow-controls {
-            margin-top: 10px;
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-        }
-
-        .slideshow-btn {
-            background: white;
-            border: 2px solid #e8b4b4;
-            color: #a95c6a;
-            padding: 0.5rem 1.5rem;
-            border-radius: 40px;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .slideshow-btn:hover {
-            background: #fcd7d7;
-        }
-
         /* photo gallery grid */
         .photo-gallery {
             display: flex;
@@ -284,60 +219,6 @@
             border-radius: 40px;
             font-style: italic;
             margin: 0.5rem 0;
-        }
-
-        /* music player */
-        .music-player {
-            margin: 2rem 0 1rem;
-            padding: 1rem;
-            background: #fff6f6;
-            border-radius: 50px;
-            border: 2px solid #fbc1c1;
-        }
-
-        .music-player p {
-            font-size: 1.2rem;
-            color: #a95c6a;
-            margin-bottom: 1rem;
-            font-weight: 600;
-        }
-
-        .music-buttons {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 12px;
-        }
-
-        .music-btn {
-            background: white;
-            border: 2px solid #e8b4b4;
-            color: #a95c6a;
-            padding: 0.6rem 1.5rem;
-            border-radius: 40px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            box-shadow: 0 3px 6px rgba(0,0,0,0.05);
-        }
-
-        .music-btn:hover {
-            background: #fcd7d7;
-            transform: scale(1.03);
-        }
-
-        .stop-btn {
-            background: #ffe6e6;
-            border-color: #d88c8c;
-            color: #b15757;
-        }
-
-        .personal-audio {
-            display: none;
         }
 
         .hidden {
@@ -400,9 +281,7 @@
             .subtitle { font-size: 1.1rem; }
             .gift-icon { font-size: 7rem; }
             .surprise-content h2 { font-size: 2rem; }
-            .slide img { height: 250px; }
             .gallery-item { width: 120px; height: 120px; }
-            .music-btn { padding: 0.5rem 1rem; font-size: 0.9rem; }
         }
     </style>
 </head>
@@ -426,28 +305,7 @@
         <div id="surpriseBox" class="surprise-content hidden">
             <h2>📸 our class snapshots</h2>
 
-            <!-- SLIDESHOW (VIDEO-LIKE) -->
-            <div class="slideshow-container">
-                <div class="slides" id="slides">
-                    <!-- First slide: title slide -->
-                    <div class="slide">
-                        <img src="image/1.jpg" alt="Class photo 1">
-                        <div class="slide-caption">✨ our journey begins</div>
-                    </div>
-                    <!-- Add more slides from gallery images (use the same as gallery for slideshow) -->
-                    <div class="slide"><img src="image/2.jpg" alt="photo 2"><div class="slide-caption">🎓 graduation day</div></div>
-                    <div class="slide"><img src="image/3.jpg" alt="photo 3"><div class="slide-caption">📚 study session</div></div>
-                    <div class="slide"><img src="image/4.jpg" alt="photo 4"><div class="slide-caption">🌟 celebration time</div></div>
-                    <!-- You can add more slides dynamically -->
-                </div>
-            </div>
-            <div class="slideshow-controls">
-                <button class="slideshow-btn" id="prevSlide"><i class="fas fa-chevron-left"></i> Prev</button>
-                <button class="slideshow-btn" id="nextSlide">Next <i class="fas fa-chevron-right"></i></button>
-            </div>
-            <p style="margin-top: 0.5rem; color: #8b5f65;">⏵ slideshow plays like a video – click arrows or wait for auto advance</p>
-
-            <!-- PHOTO GALLERY GRID (original images) -->
+            <!-- PHOTO GALLERY GRID -->
             <div class="photo-gallery" id="photoGallery">
                 <div class="gallery-item"><img src="image/1.jpg" alt="photo"></div>
                 <div class="gallery-item"><img src="image/2.jpg" alt="photo"></div>
@@ -518,32 +376,6 @@
                 every picture holds a story<br>thanks for the memories
             </div>
 
-            <!-- MUSIC PLAYER with multiple personal audio tracks -->
-            <div class="music-player">
-                <p><i class="fas fa-music"></i> choose your melody</p>
-                <div class="music-buttons">
-                    <button class="music-btn" id="playCanon"><i class="fas fa-play"></i> Graduation Canon</button>
-                    <button class="music-btn" id="playMarch"><i class="fas fa-play"></i> Pomp & Circumstance</button>
-                    <button class="music-btn" id="playLove"><i class="fas fa-play"></i> Class Anthem</button>
-                    <button class="music-btn" id="playEdSheeran"><i class="fas fa-play"></i> Graduation Style</button>
-                    <button class="music-btn" id="playPersonal1"><i class="fas fa-microphone"></i> Our Song 1</button>
-                    <button class="music-btn" id="playPersonal2"><i class="fas fa-microphone"></i> Our Song 2</button>
-                    <button class="music-btn" id="playPersonal3"><i class="fas fa-microphone"></i> Our Song 3</button>
-                    <button class="music-btn stop-btn" id="stopMusic"><i class="fas fa-stop"></i> Stop</button>
-                </div>
-            </div>
-
-            <!-- hidden audio elements for personal recordings (replace with your own) -->
-            <audio id="personalAudio1" class="personal-audio" preload="none">
-                <source src="image/music1.mp3" type="audio/mpeg">
-            </audio>
-            <audio id="personalAudio2" class="personal-audio" preload="none">
-                <source src="image/music2.mp3" type="audio/mpeg">
-            </audio>
-            <audio id="personalAudio3" class="personal-audio" preload="none">
-                <source src="image/music3.mp3" type="audio/mpeg">
-            </audio>
-
             <div class="signature">
                 <i class="fas fa-star" style="color:#f5b342;"></i> with best wishes, your classmates
             </div>
@@ -575,146 +407,11 @@
             }
             for (let i = 0; i < 25; i++) starContainer.appendChild(createStar());
 
-            // slideshow logic
-            const slides = document.getElementById('slides');
-            const slidesCount = slides.children.length;
-            let currentIndex = 0;
-
-            function updateSlide() {
-                slides.style.transform = `translateX(-${currentIndex * 100}%)`;
-            }
-
-            document.getElementById('nextSlide').addEventListener('click', () => {
-                currentIndex = (currentIndex + 1) % slidesCount;
-                updateSlide();
-            });
-
-            document.getElementById('prevSlide').addEventListener('click', () => {
-                currentIndex = (currentIndex - 1 + slidesCount) % slidesCount;
-                updateSlide();
-            });
-
-            // auto advance every 5 seconds
-            let autoAdvance = setInterval(() => {
-                currentIndex = (currentIndex + 1) % slidesCount;
-                updateSlide();
-            }, 5000);
-
-            // reset timer on manual click
-            document.getElementById('nextSlide').addEventListener('click', resetTimer);
-            document.getElementById('prevSlide').addEventListener('click', resetTimer);
-
-            function resetTimer() {
-                clearInterval(autoAdvance);
-                autoAdvance = setInterval(() => {
-                    currentIndex = (currentIndex + 1) % slidesCount;
-                    updateSlide();
-                }, 5000);
-            }
-
-            // music player (synthesized melodies)
-            let currentAudioCtx = null;
-            let currentOscillators = [];
-
-            function stopCurrentMusic() {
-                if (currentAudioCtx) {
-                    currentOscillators.forEach(osc => { try { osc.stop(); } catch (e) {} });
-                    if (currentAudioCtx.state !== 'closed') currentAudioCtx.close();
-                }
-                currentOscillators = [];
-                currentAudioCtx = null;
-            }
-
-            function playMelody(notes, baseVolume = 0.15) {
-                stopCurrentMusic();
-                const AudioContext = window.AudioContext || window.webkitAudioContext;
-                if (!AudioContext) return;
-                const audioCtx = new AudioContext();
-                currentAudioCtx = audioCtx;
-                if (audioCtx.state === 'suspended') audioCtx.resume();
-                const now = audioCtx.currentTime;
-                function playNote(frequency, startTime, duration, volume = baseVolume, type = 'sine') {
-                    const osc = audioCtx.createOscillator();
-                    const gainNode = audioCtx.createGain();
-                    osc.type = type; osc.frequency.value = frequency;
-                    gainNode.gain.setValueAtTime(0, startTime);
-                    gainNode.gain.linearRampToValueAtTime(volume, startTime + 0.03);
-                    gainNode.gain.exponentialRampToValueAtTime(0.001, startTime + duration);
-                    osc.connect(gainNode); gainNode.connect(audioCtx.destination);
-                    currentOscillators.push(osc);
-                    osc.start(startTime); osc.stop(startTime + duration + 0.1);
-                }
-                let time = now + 0.2;
-                notes.forEach(n => {
-                    playNote(n.f, time, n.dur, n.vol || baseVolume, n.type || 'sine');
-                    time += n.dur + 0.03;
-                });
-                if (notes.length) playNote(261.63, now + 0.2, time - now - 0.2, 0.06, 'sine');
-            }
-
-            function playCanon() {
-                playMelody([
-                    { f: 523.25, dur: 0.6 }, { f: 587.33, dur: 0.6 }, { f: 659.25, dur: 0.6 },
-                    { f: 698.46, dur: 1.0 }, { f: 659.25, dur: 0.5 }, { f: 587.33, dur: 0.5 },
-                    { f: 523.25, dur: 1.2 }
-                ], 0.15);
-            }
-            function playMarch() {
-                playMelody([
-                    { f: 659.25, dur: 0.4 }, { f: 659.25, dur: 0.4 }, { f: 659.25, dur: 0.8 },
-                    { f: 659.25, dur: 0.4 }, { f: 659.25, dur: 0.4 }, { f: 659.25, dur: 0.8 },
-                    { f: 659.25, dur: 0.4 }, { f: 783.99, dur: 0.6 }, { f: 523.25, dur: 0.6 },
-                    { f: 587.33, dur: 0.6 }, { f: 659.25, dur: 1.2 }
-                ], 0.18);
-            }
-            function playLove() {
-                playMelody([
-                    { f: 523.25, dur: 1.0, vol: 0.2 }, { f: 587.33, dur: 0.8, vol: 0.2 },
-                    { f: 659.25, dur: 0.8, vol: 0.2 }, { f: 698.46, dur: 1.2, vol: 0.22 },
-                    { f: 783.99, dur: 1.0, vol: 0.2 }, { f: 698.46, dur: 0.8, vol: 0.2 },
-                    { f: 659.25, dur: 1.5, vol: 0.18 }
-                ], 0.18);
-            }
-            function playEdSheeranStyle() {
-                playMelody([
-                    { f: 392.00, dur: 0.8, vol: 0.2 }, { f: 493.88, dur: 0.8, vol: 0.2 },
-                    { f: 587.33, dur: 0.8, vol: 0.2 }, { f: 523.25, dur: 0.6, vol: 0.18 },
-                    { f: 440.00, dur: 0.6, vol: 0.18 }, { f: 392.00, dur: 1.2, vol: 0.22 },
-                    { f: 349.23, dur: 0.8, vol: 0.2 }, { f: 392.00, dur: 1.5, vol: 0.25 }
-                ], 0.2);
-            }
-
-            // Personal audio players
-            const personalAudio1 = document.getElementById('personalAudio1');
-            const personalAudio2 = document.getElementById('personalAudio2');
-            const personalAudio3 = document.getElementById('personalAudio3');
-
-            function stopAllPersonalAudio() {
-                [personalAudio1, personalAudio2, personalAudio3].forEach(a => {
-                    if (a) { a.pause(); a.currentTime = 0; }
-                });
-            }
-
-            function playPersonalAudio(audioElement) {
-                stopCurrentMusic();
-                stopAllPersonalAudio();
-                audioElement.play().catch(e => alert("Could not play audio. Check file URL."));
-            }
-
-            document.getElementById('playPersonal1').addEventListener('click', () => playPersonalAudio(personalAudio1));
-            document.getElementById('playPersonal2').addEventListener('click', () => playPersonalAudio(personalAudio2));
-            document.getElementById('playPersonal3').addEventListener('click', () => playPersonalAudio(personalAudio3));
-
-            function stopAllMusic() {
-                stopCurrentMusic();
-                stopAllPersonalAudio();
-            }
-
-            document.getElementById('playCanon').addEventListener('click', playCanon);
-            document.getElementById('playMarch').addEventListener('click', playMarch);
-            document.getElementById('playLove').addEventListener('click', playLove);
-            document.getElementById('playEdSheeran').addEventListener('click', playEdSheeranStyle);
-            document.getElementById('stopMusic').addEventListener('click', stopAllMusic);
+            // keep stars replenished
+            setInterval(() => {
+                if (starContainer.children.length < 35) starContainer.appendChild(createStar());
+                else { starContainer.removeChild(starContainer.firstChild); starContainer.appendChild(createStar()); }
+            }, 3000);
 
             // reveal gift
             const gift = document.getElementById('giftTrigger');
@@ -732,20 +429,17 @@
                 setTimeout(() => {
                     gift.style.display = 'none'; subtitle.style.display = 'none'; hint.style.display = 'none';
                     surprise.classList.remove('hidden'); surprise.classList.add('fade-in');
+                    // confetti
                     confetti({ particleCount: 120, spread: 80, origin: { y: 0.6 }, colors: ['#f9e0a0', '#c9e4ff', '#ffd1dc'] });
                     for (let i = 0; i < 8; i++) setTimeout(() => starContainer.appendChild(createStar()), i * 120);
                 }, 300);
             }
+
             gift.addEventListener('click', revealGift);
             gift.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); revealGift(); } });
 
-            // initial confetti
+            // initial confetti (tiny)
             window.addEventListener('load', () => setTimeout(() => confetti({ particleCount: 30, spread: 45, origin: { y: 0.5 }, colors: ['#f9e0a0'] }), 600));
-
-            setInterval(() => {
-                if (starContainer.children.length < 35) starContainer.appendChild(createStar());
-                else { starContainer.removeChild(starContainer.firstChild); starContainer.appendChild(createStar()); }
-            }, 3000);
 
             // LIGHTBOX for gallery images
             const modal = document.getElementById('lightboxModal');
@@ -783,10 +477,9 @@
     </script>
     <!-- 
         CUSTOMIZATION GUIDE:
-        1. Replace all image paths in slides and gallery with your own class photos.
-        2. Update the audio source paths (music1.mp3, music2.mp3, etc.) with your own audio files (recordings, songs).
-        3. Adjust the slideshow slides (add more .slide divs) to match your favorite moments.
-        4. The page now has a gift reveal, slideshow, lightbox, and music player like the wedding version.
+        1. Replace all image paths (image/1.jpg, image/2.jpg, etc.) with your own class photos.
+        2. Add or remove gallery items as needed.
+        3. The page now contains only the photo gallery with click-to-zoom, no slideshow, no music.
     -->
 </body>
 </html>
