@@ -105,52 +105,6 @@
             border: 1px solid #b0c8f0;
         }
 
-        .gift-wrapper {
-            cursor: pointer;
-            transition: transform 0.3s ease;
-            display: inline-block;
-            padding: 15px 35px;
-            border-radius: 120px;
-            background: rgba(255, 250, 240, 0.6);
-            margin: 15px 0 15px;
-            -webkit-tap-highlight-color: transparent;
-            border: 2px dashed #e8b4b4;
-        }
-
-        .gift-wrapper:hover {
-            transform: scale(1.1);
-        }
-
-        .gift-wrapper:active {
-            transform: scale(0.95);
-        }
-
-        .gift-icon {
-            font-size: 10rem;
-            line-height: 1;
-            color: #d4a5a5;
-            filter: drop-shadow(0 15px 10px #fcc2c2);
-            animation: gentleWobble 4s infinite;
-        }
-
-        @keyframes gentleWobble {
-            0%, 100% { transform: rotate(0deg); }
-            25% { transform: rotate(5deg); }
-            75% { transform: rotate(-5deg); }
-        }
-
-        .click-hint {
-            font-size: 1.2rem;
-            color: #9b6b7c;
-            background: #fff0ed;
-            padding: 0.4rem 1.4rem;
-            border-radius: 40px;
-            display: inline-block;
-            margin: 10px 0 0;
-            font-weight: 500;
-            border: 1px dotted #dba1a1;
-        }
-
         .surprise-content {
             margin-top: 2rem;
             padding: 1.8rem 1.8rem 2.5rem;
@@ -199,6 +153,7 @@
             height: 100%;
             object-fit: cover;
             display: block;
+            pointer-events: none; /* ensures click goes to parent */
         }
 
         .wedding-message {
@@ -219,19 +174,6 @@
             border-radius: 40px;
             font-style: italic;
             margin: 0.5rem 0;
-        }
-
-        .hidden {
-            display: none;
-        }
-
-        .fade-in {
-            animation: fadeInUp 0.8s forwards;
-        }
-
-        @keyframes fadeInUp {
-            0% { opacity: 0; transform: translateY(30px); }
-            100% { opacity: 1; transform: translateY(0); }
         }
 
         /* Lightbox modal */
@@ -269,6 +211,7 @@
             color: white;
             cursor: pointer;
             transition: 0.2s;
+            z-index: 1001;
         }
 
         .lightbox-close:hover {
@@ -279,7 +222,6 @@
         @media (max-width: 600px) {
             h1 { font-size: 2.2rem; }
             .subtitle { font-size: 1.1rem; }
-            .gift-icon { font-size: 7rem; }
             .surprise-content h2 { font-size: 2rem; }
             .gallery-item { width: 120px; height: 120px; }
         }
@@ -293,16 +235,8 @@
         <h1>🎓 class memory book</h1>
         <div class="subtitle">classic photo studio · class of 2026</div>
 
-        <div id="giftTrigger" class="gift-wrapper" role="button" tabindex="0" aria-label="Open memory book">
-            <div class="gift-icon">
-                <i class="fas fa-gift"></i>
-            </div>
-        </div>
-        <div class="click-hint">
-            <i class="fas fa-mouse-pointer"></i> tap to open your gift
-        </div>
-
-        <div id="surpriseBox" class="surprise-content hidden">
+        <!-- Gallery content visible immediately, no gift tap needed -->
+        <div class="surprise-content">
             <h2>📸 our class snapshots</h2>
 
             <!-- PHOTO GALLERY GRID -->
@@ -413,34 +347,6 @@
                 else { starContainer.removeChild(starContainer.firstChild); starContainer.appendChild(createStar()); }
             }, 3000);
 
-            // reveal gift
-            const gift = document.getElementById('giftTrigger');
-            const surprise = document.getElementById('surpriseBox');
-            const subtitle = document.querySelector('.subtitle');
-            const hint = document.querySelector('.click-hint');
-            let revealed = false;
-
-            function revealGift() {
-                if (revealed) return;
-                revealed = true;
-                gift.style.transition = 'opacity 0.3s'; gift.style.opacity = '0';
-                subtitle.style.transition = 'opacity 0.3s'; subtitle.style.opacity = '0';
-                hint.style.transition = 'opacity 0.3s'; hint.style.opacity = '0';
-                setTimeout(() => {
-                    gift.style.display = 'none'; subtitle.style.display = 'none'; hint.style.display = 'none';
-                    surprise.classList.remove('hidden'); surprise.classList.add('fade-in');
-                    // confetti
-                    confetti({ particleCount: 120, spread: 80, origin: { y: 0.6 }, colors: ['#f9e0a0', '#c9e4ff', '#ffd1dc'] });
-                    for (let i = 0; i < 8; i++) setTimeout(() => starContainer.appendChild(createStar()), i * 120);
-                }, 300);
-            }
-
-            gift.addEventListener('click', revealGift);
-            gift.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); revealGift(); } });
-
-            // initial confetti (tiny)
-            window.addEventListener('load', () => setTimeout(() => confetti({ particleCount: 30, spread: 45, origin: { y: 0.5 }, colors: ['#f9e0a0'] }), 600));
-
             // LIGHTBOX for gallery images
             const modal = document.getElementById('lightboxModal');
             const modalImg = document.getElementById('lightboxImg');
@@ -448,8 +354,13 @@
             const galleryItems = document.querySelectorAll('.gallery-item');
 
             function openLightbox(imgSrc) {
+                if (!imgSrc) return;
                 modalImg.src = imgSrc;
                 modal.classList.add('active');
+                // Fallback if image fails
+                modalImg.onerror = function() {
+                    modalImg.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"%3E%3Ctext x="50%" y="50%" text-anchor="middle" dy=".3em" fill="white" font-size="14"%3EImage not found%3C/text%3E%3C/svg%3E';
+                };
             }
 
             function closeLightbox() {
@@ -458,7 +369,7 @@
             }
 
             galleryItems.forEach(item => {
-                item.addEventListener('click', (e) => {
+                item.addEventListener('click', () => {
                     const img = item.querySelector('img');
                     if (img && img.src) {
                         openLightbox(img.src);
@@ -479,7 +390,8 @@
         CUSTOMIZATION GUIDE:
         1. Replace all image paths (image/1.jpg, image/2.jpg, etc.) with your own class photos.
         2. Add or remove gallery items as needed.
-        3. The page now contains only the photo gallery with click-to-zoom, no slideshow, no music.
+        3. Click any photo to zoom (lightbox). Close with X, click outside, or ESC key.
+        4. No tap to open – gallery is shown immediately.
     -->
 </body>
 </html>
